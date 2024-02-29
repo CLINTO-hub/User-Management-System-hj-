@@ -1,0 +1,43 @@
+<%- include('../layouts/header.ejs') %>
+<nav class="navbar navbar-light bg-light justify-content-between">
+    <a class="navbar-brand">Welcome</a>
+    <a href="/admin/new-user" class="btn btn-success" role="button">Add User</a>
+    <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="search">
+        <input class="btn btn-outline-success my-2 my-sm-0" value="search" type="submit">
+      </form>
+    <a href="/admin/logout" class="btn btn-danger" role="button">Logout</a>
+</nav>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Mobile No</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+
+    <% if(user.length > 0){ %>
+        <% for(let i=0; i<user.length; i++){ %>
+            <tr>
+                <td><%= i+1 %></td>
+                <td><%= user[i].name %></td>
+                <td><%= user[i].email %></td>
+                <td><%= user[i].mobile %></td>
+                <td><a href="/admin/edit-user?id=<%=user[i]._id%>" class="btn btn-outline-success" role="button">Edit</a></td>
+                <td><a href="/admin/delete-user?id=<%=user[i]._id%>" class="btn btn-outline-danger" role="button">Delete</a></td>
+
+            </tr>
+        <% } %>
+    <% } else { %>
+        <tr>
+            <td colspan="4">Users Not found</td>
+        </tr>
+    <% } %>
+</table>
+
+<%- include('../layouts/footer.ejs') %>
